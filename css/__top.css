@@ -674,81 +674,87 @@
     top: 0;
 }
 
-.question .part3{
+/* --- 【新・part5】金メダルの明瞭会計（旧part3から名前を変更） --- */
+.question .part5 {
     position: relative;
     z-index: 3;
     padding-bottom: 60px;
 }
-.question .part3 .bg{
+.question .part5 .bg {
     position: absolute;
     width: 100%;
     object-fit: cover;
     bottom: 0;
     left: 0;
 }
-.question .part3 .part3-content{
+.question .part5 .part5-content {
     padding-top: 76px;
     position: relative;
     z-index: 2;
     color: #fff;
 }
-.question .part3 .part3-top{
+.question .part5 .part5-top {
     display: flex;
     margin-left: 100px;
 }
-.question .part3 .num{
+.question .part5 .num {
     width: 120px;
 }
-.question .part3 .text1{
+.question .part5 .text1 {
     font-size: 25px;
     line-height: 1.3;
 }
-.question .part3 .text2{
+.question .part5 .text2 {
     font-size: 40px;
     line-height: 1.2;
 }
-.question .part3 .part3-middle{
+.question .part5 .part5-middle {
     margin-top: 15px;
     display: flex;
     margin-left: 88px;
 }
-.question .part3 .middle-img{
+.question .part5 .middle-img {
     width: 360px;
 }
-.question .part3  .list{
+.question .part5 .list {
     font-size: 18px;
     color: #000;
     letter-spacing: -1.5px;
 }
-.question .part3 .row{
+.question .part5 .row {
     display: flex;
 }
-.question .part3 .row .item{
+.question .part5 .row .item {
     flex: 1;
 }
-.question .part3 .row .item:nth-of-type(2){
+.question .part5 .row .item:nth-of-type(2) {
     margin-left: 7px;
 }
-.question .part3 .item{
+.question .part5 .item {
     background-image: linear-gradient(to right,#EFD270,#FFE4A8,#764900);
     margin-top: 7px;
     text-align: center;
     line-height: 35px;
     padding: 0 22px;
 }
-.question .part3 .part3-tip{
+.question .part5 .part5-tip {
     font-size: 16px;
     line-height: 1.7;
     width: 550px;
     margin: 25px auto 0;
 }
-.question .part4{
+
+/* --- 【新・part3 と part4】共通のデザイン（画像＋テキストのレイアウト） --- */
+.question .part3,
+.question .part4 {
     position: relative;
     z-index: 2;
     margin-top: -100px;
     padding-bottom: 105px;
 }
-.question .part4 .bg{
+
+.question .part3 .bg,
+.question .part4 .bg {
     width: 100%;
     height: 100%;
     position: absolute;
@@ -756,38 +762,51 @@
     left: 0;
     object-fit: cover;
 }
-.question .part4 .part4-content{
+
+.question .part3 .part3-content,
+.question .part4 .part4-content {
     padding-top: 80px;
     position: relative;
     z-index: 2;
     color: #fff;
 }
-.question .part4 .part4-top{
+
+.question .part3 .part3-top,
+.question .part4 .part4-top {
     display: flex;
     margin-right: 95px;
     justify-content: flex-end;
 }
-.question .part4 .texts{
+
+.question .part3 .texts,
+.question .part4 .texts {
     text-align: right;
 }
-.question .part4 .text1{
+
+/* 文字サイズの一括設定 */
+.question .part3 .text1, .question .part4 .text1,
+.question .part3 .text2, .question .part4 .text2 {
     font-size: 25px;
 }
-.question .part4 .text2{
-    font-size: 25px;
-}
-.question .part4 .text3{
+.question .part3 .text3, .question .part4 .text3 {
     font-size: 40px;
 }
-.question .part4 .num{
+
+.question .part3 .num,
+.question .part4 .num {
     width: 120px;
     margin-left: 13px;
 }
-.question .part4 .part4-img{
+
+/* 画像と注釈のスタイル */
+.question .part3 .part3-img,
+.question .part4 .part4-img {
     width: 550px;
     margin: 10px auto 0;
 }
-.question .part4 .part4-tip{
+
+.question .part3 .part3-tip,
+.question .part4 .part4-tip {
     font-size: 16px;
     line-height: 1.7;
     width: 550px;

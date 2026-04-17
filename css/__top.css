@@ -1870,83 +1870,89 @@ input[type="checkbox"]:checked:after {
         width: 42.4vw;
         bottom: 3.333333vw;
     }
-    .question .part3 .part3-content{
+   /* --- 【スマホ用】新・part5：金メダルの明瞭会計（旧part3から名前変更） --- */
+    .question .part5 .part5-content {
         padding-top: 14.133333vw;
     }
-    .question .part3{
+    .question .part5 {
         padding-bottom: 8vw;
     }
-    .question .part3 .part3-top{
+    .question .part5 .part5-top {
         margin-left: 14.666667vw;
     }
-    .question .part3 .num{
+    .question .part5 .num {
         width: 16vw;
     }
-    .question .part3 .text1{
+    .question .part5 .text1 {
         font-size: 16px;
     }
-    .question .part3 .text2{
+    .question .part5 .text2 {
         font-size: 22px;
     }
-    .question .part3 .part3-middle{
+    .question .part5 .part5-middle {
         margin-top: 2vw;
         margin-left: 11.733333vw;
     }
-    .question .part3 .middle-img{
+    .question .part5 .middle-img {
         width: 48vw;
     }
-    .question .part3 .list{
+    .question .part5 .list {
         font-size: 2.4vw;
         letter-spacing: -1px;
     }
-    .question .part3 .item{
+    .question .part5 .item {
         margin-top: .933333vw;
         line-height: 4.666667vw;
         padding: 0 2.933333vw;
     }
-    .question .part3 .row .item:nth-of-type(2){
+    .question .part5 .row .item:nth-of-type(2) {
         margin-left: .933333vw;
     }
-    .question .part3 .part3-tip{
+    .question .part5 .part5-tip {
         margin-top: 3.333333vw;
         font-size: min(3vw, 14px);
         padding: 0 9.333333vw;
         width: auto;
     }
-    .question .part4{
+
+    /* --- 【スマホ用】新・part3 と part4：共通のデザイン（注射と内服） --- */
+    .question .part3,
+    .question .part4 {
         padding-bottom: 14vw;
         margin-top: -13.333333vw;
     }
-    .question .part4 .part4-content{
+    .question .part3 .part3-content,
+    .question .part4 .part4-content {
         padding-top: 10.666667vw;
     }
-    .question .part4 .part4-top{
+    .question .part3 .part3-top,
+    .question .part4 .part4-top {
         margin-right: 12.666667vw;
     }
-    .question .part4 .text1{
+    .question .part3 .text1, .question .part4 .text1 {
         font-size: 16px;
     }
-    .question .part4 .text2{
+    .question .part3 .text2, .question .part4 .text2 {
         font-size: 20px;
     }
-    .question .part4 .text3{
+    .question .part3 .text3, .question .part4 .text3 {
         font-size: 5.333333vw;
     }
-    .question .part4 .num{
+    .question .part3 .num, .question .part4 .num {
         width: 16vw;
         margin-left: 1.733333vw;
     }
-    .question .part4 .part4-img{
+    .question .part3 .part3-img, .question .part4 .part4-img {
         width: 73.333333vw;
         margin-top: 1.333333vw;
     }
-    .question .part4 .part4-tip{
+    .question .part3 .part3-tip, .question .part4 .part4-tip {
         margin-top: 2.666667vw;
         font-size: min(3vw, 14px);
         padding: 0 9.333333vw;
         width: auto;
     }
-    .question .part3 .bg{
+    .question .part3 .bg, .question .part5 .bg {
         height: auto;
     }
     .cold{

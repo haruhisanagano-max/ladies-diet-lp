@@ -1,0 +1,1293 @@
+<?php
+    include_once('include/functions.php');
+    define("FMAIL_FORM", 0);
+    define("FMAIL_PRIVE", 1);
+    define("FMAIL_THANK", 2);
+    $action=@$_POST['action'];
+    $page=FMAIL_FORM;
+    $error_msg=array();
+    $error_method = '';
+    $error_name = '';
+    $error_age = '';
+    $error_datetime = '';
+    $error_datetime02 = '';
+    $error_email = '';
+    $error_acceptance='';
+    $error_flag=false;
+    if($action == ''){
+        $page = FMAIL_FORM;
+    }
+    elseif($action == 'action'){
+        $parm = @$_POST['parm'];
+        if(@$parm['method'] == ''){
+            $error_flag = true;
+            $error_method = '※希望クリニックを入力してください。';
+        }
+        if(@$parm['name'] == ''){
+            $error_flag = true;
+            $error_name = '※お名前を入力してください。';
+        }
+
+        if(@$parm['dateform'] == '' && @$parm['time'] == ''){
+            $error_flag = true;
+            $error_datetime = '※予約希望日時（第1希望）を入力してください。';
+        }
+
+        if(@$parm['dateform02'] == '' && @$parm['time02'] == ''){
+            $error_flag = true;
+            $error_datetime02 = '※予約希望日時（第2希望）を入力してください。';
+        }
+
+        if(@$parm['age'] == ''){
+            $error_flag = true;
+            $error_age = '※年齢を入力してください。';
+        }
+
+        if(@$parm['email']==''){
+	        $error_flag=true;
+	        $error_email='※メールアドレスを入力してください。';
+        }elseif (!is_email(@$parm['email'])){
+            $error_flag=true;
+            $error_email='※メールアドレスは正しくありません。';
+        }
+        if(@$parm['tel']==''){
+            $error_flag=true;
+            $error_tel ='※電話番号を入力してください。';
+        }elseif(!is_tel(@$parm['tel'])) {
+            $error_flag=true;
+            $error_tel='※電話番号正しくありません。';
+        }
+        if(@$parm['acceptance'] == ''){
+            $error_flag = true;
+            $error_acceptance = '※個人情報保護方針ご確認してください。';
+        }
+        if($error_flag){
+            $page = FMAIL_FORM;
+        } else {
+            $page = FMAIL_PRIVE;
+        }
+    } elseif($action == 'edit') {
+        $parm = @$_POST['parm'];
+        $page = FMAIL_FORM;
+    } else {
+        error_reporting(0);
+        require_once 'include/config.php';
+        mb_language($language);
+        mb_internal_encoding($unicode);
+
+        if(!@$_POST) {
+            header("location:index.php");
+            exit();
+        }
+        $page=FMAIL_THANK;
+        $parm=$_POST['parm'];
+
+        $date01 = PHP_EOL.'【第一希望】'.$parm['dateform'].' '.$parm['time'].PHP_EOL;
+        $date02 = '【第二希望】'.$parm['dateform02'].' '.$parm['time02'];
+
+        $message['【予約希望医院】'] =''.$parm['method'].'';
+        $message['【問い合わせ種類】カウンセリング予約'] =''.$date01.$date02.'';
+        $message['【名前】'] =''.$parm['name'].'';
+        $message['【年齢】'] =''.$parm['age'].'';
+        $message['【電話番号】'] =''.$parm['tel'].'';
+        $message['【メールアドレス】'] =''.$parm['email'].''; 
+        $message['【ご希望の施術】'] =''.$parm['treatment'].''; 
+        $message['【問い合わせ内容】'] ='
+'.$parm['content'].'
+';
+        
+        $auto_mail =SBC_DBC(@$parm['email'],1);
+
+        include('include/sendmail.php');
+        
+    }
+?>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-P4QF8L7');</script>
+<!-- End Google Tag Manager -->
+<!-- Google Tag Manager -->
+<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+})(window,document,'script','dataLayer','GTM-53RKSNF');</script>
+<!-- End Google Tag Manager -->
+<!--[if IE]><meta http-equiv="X-UA-Compatible" content="IE=edge"><![endif]-->
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="Description" content="ヴァージンクリニックのメンズ医療脱毛は短期間の効果を期待できるジェントルを全台導入。">
+<title>ヴァージンクリニックのメンズ医療脱毛</title>
+<!--[if lt IE 9]>
+  <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+  <![endif]-->
+ <link rel="stylesheet" href="//use.fontawesome.com/releases/v5.15.1/css/all.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" type="text/css" href="css/slick.css">
+<link rel="stylesheet" type="text/css" href="css/swiper.min.css">
+<link rel="stylesheet" type="text/css" href="css/slick-theme.css">
+<link rel="stylesheet" type="text/css" href="style.css">
+
+<script type="text/javascript" src="js/jquery.min_v3.2.1.js"></script>
+<script type="text/javascript" src="js/common.js"></script>
+<script type="text/javascript" src="js/smartphone.js"></script>
+<script type="text/javascript" src="js/jquery.biggerlink.min.js"></script>
+<script type="text/javascript" src="js/jquery.matchHeight-min.js"></script>
+<script type="text/javascript" src="js/slick.js"></script>
+<script type="text/javascript" src="js/swiper.min.js"></script>
+<script src="./js/index.js"></script>
+	<script>
+		$(function () {
+			$(window).scroll(function () {
+				if($(this).scrollTop()>90){
+					$("#header").addClass("headerscroll01").slideDown(500);
+				}else if($(this).scrollTop()<90) {
+                    $("#header").removeClass("headerscroll01");
+				}
+            })
+        })
+	</script>
+	<script type="text/javascript">
+        $(function(){
+            if($('.biggerlink').length > 0){
+                $('.biggerlink').biggerlink();
+            }
+        });
+	</script>
+	<script
+			src="https://cdn.jsdelivr.net/npm/viewport-extra@2.0.1/dist/iife/viewport-extra.min.js"
+			defer
+	></script>
+	<script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // タブレット端末かどうかを判定
+            var ua = navigator.userAgent
+            var isSmartPhone = ua.indexOf('iPhone') > -1 ||
+                (ua.indexOf('Android') > -1 && ua.indexOf('Mobile') > -1)
+            var isTablet = !isSmartPhone && (
+                ua.indexOf('iPad') > -1 ||
+                (ua.indexOf('Macintosh') > -1 && 'ontouchend' in document) ||
+                ua.indexOf('Android') > -1
+            )
+            // タブレット端末でのみ最小幅を設定
+            if (isTablet) ViewportExtra.setContent({ minWidth: 1024 })
+        })
+	</script>
+</head>
+<body>
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4QF8L7"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-53RKSNF"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
+<section id="wrapper" class="top">
+	<header>
+		<!-- <p class="text1">ヴァージンクリニックの</p>
+		<p class="text2">メンズ医療脱毛</p> -->
+	</header>
+	<section id="mainimg">
+
+	</section>
+	<section id="content" class="content">
+		<img src="./images/top/bg.jpg" class="content-bg" alt="">
+		<a href="./"><img src="./images/top/logo-right.png" class="logo-right op" alt=""></a>
+		<div class="fixed-left ff-bold">
+			<a class="left-item" href="#jump1">-医療脱毛と美容脱毛の違い</a>
+			<a class="left-item" href="#jump2">-選ばれる理由</a>
+			<a class="left-item" href="#jump3">-料金プラン</a>
+			<a class="left-item" href="#jump4">-カウンセリングの流れ</a>
+			<a class="left-item" href="#jump5">-クリニックのご案内</a>
+			<a class="left-item" href="#jump6">-よくある質問</a>
+			<a class="left-item" href="#jump7">-無料カウンセリング予約</a>
+		</div>
+		<div class="fixed-right ff-bold">
+			<p class="right-text">カウンセリングだけでもOK! 
+				<br/>まずは無料相談！</p>
+				<div class="twoBtn">
+					<ul>
+						<li><a class="js-modal-open" data-modal="tel"><img src="./images/top/btn_tel01.png"  alt=""></a></li>
+						<li><a class="js-modal-open" data-modal="line"><img src="./images/top/btn_line01.png"  alt=""></a></li>
+					</ul>
+				</div>
+				<div class="right-btn to-bottom purupuru">
+					<img src="./images/top/btn-left.png"  alt="">
+				</div>
+		</div>
+		<div class="wrapper">
+			<div class="reduce gs">
+				<img src="./images/top/reduce-man.png" class="man" alt="">
+				<div class="inner">
+					<h1 class="bar ff-bold">
+						<p class="text1">ヴァージンクリニックの</p>
+						<p class="text2">メンズ医療脱毛</p>
+					</h1>
+					<!-- <img src="./images/top/reduce-bg.jpg" class="bg" alt=""> -->
+					<!-- <img src="./images/top/reduce-person.png" class="person" alt="">
+					<div class="text-content">
+						<img src="./images/top/reduce-text3.png" class="text3" alt="">
+						<img src="./images/top/reduce-text4.png" class="text4" alt="">
+					</div>
+					<div class="list">
+						<div class="item">
+							<img src="./images/top/reduce-circle.png" class="item-bg" alt="">
+							<img src="./images/top/reduce-icon1.png" class="item-text item-text1" alt="">
+						</div>
+						<div class="item">
+							<img src="./images/top/reduce-circle.png" class="item-bg" alt="">
+							<img src="./images/top/reduce-icon2.png" class="item-text item-text2" alt="">
+						</div>
+						<div class="item">
+							<img src="./images/top/reduce-circle.png" class="item-bg" alt="">
+							<img src="./images/top/reduce-icon3.png" class="item-text item-text3" alt="">
+						</div>
+						<div class="item">
+							<img src="./images/top/reduce-circle.png" class="item-bg" alt="">
+							<img src="./images/top/reduce-icon4.png" class="item-text item-text4" alt="">
+						</div> -->
+					<img src="./images/top/bg_mv_new.png" alt="">
+					<div class="reduce-texts">
+						<div class="reduce-btn right-btn purupuru">
+							<img src="./images/top/reduce-btn.png" alt="">
+						</div>
+					</div>
+					
+					<!-- <div class="reduce-texts">
+						<img src="./images/top/reduce-text10.png"  alt="">
+						<div class="reduce-btn right-btn purupuru">
+							<img src="./images/top/reduce-btn.png" alt="">
+						</div>
+					</div> -->
+					<!-- <div class="reduce-bottom">
+						<p class="bottom-title">顔全体医療脱毛5回コース</p>
+						<div class="white">
+							<div class="text5">
+								<p class="left">施術範囲</p>
+								<p class="right">額・頬・鼻下・顎・顎下の顔全体と首を脱毛</p>
+							</div>
+							<div class="texts">
+								<div class="rect">
+									<span class="ff-s"></span><span class="ff-30"></span><span class="ff-20"></span>
+								</div>
+								<p class="month"></p>
+							</div>
+							<p class="text7">カウンセリングだけでもOK! まずは無料相談！</p>
+							<div class="btn">
+								<div class="btn-inner">
+									<img src="./images/top/reduce-red.png" class="icon-red" alt="">
+									<p>無料カウンセリング予約</p>
+								</div>
+								<img src="./images/top/Botan.png" class="btn-bg" alt="">
+							</div>
+						</div>
+					</div> -->
+				</div>
+			</div>
+			<div class="result gs">
+				<div class="inner">
+					<img src="./images/top/result-bg.jpg" class="bg" alt="">
+					<p class="text1 ff-bold">メンズに効果が期待できる
+						<br/>ジェントルマックスプロ全台導入で
+					</p>
+					<!-- <p class="text2">短期間で結果を残す！</p> -->
+					<img src="./images/top/result-text2.png" class="text2" alt="">
+					<div class="list ff-bold">
+						<div class="item item1">
+							<img src="./images/top/result-img1.png" class="item-img" alt="">
+							<p class="item-text">施術前のお肌</p>
+						</div>
+						<img src="./images/top/result-arrow.png" class="arrow" alt="">
+						<div class="item item2">
+							<img src="./images/top/result-img2.png" class="item-img" alt="">
+							<p class="item-text item-text1">ヴァージンクリニックなら
+								</p>
+							<p class="item-text item-text2">最短で効果を実感！</p>
+							<div class="circle-wrap">
+								<img src="./images/top/saitan1.png" class="circle1" alt="">
+							</div>
+						</div>
+					</div>
+					<p class="tip">※脱毛効果には個人差があります。</p>
+				</div>
+			</div>
+			<div class="table gs point" id="jump1">
+				<div class="inner">
+					<img src="./images/top/table-bg1.png" class="bg1" alt="">
+					<img src="./images/top/table-bg2.png" class="bg2" alt="">
+					
+					<div class="table-content">
+						<img src="./images/top/table-person.png" class="person" alt="">
+						<img src="./images/top/table-machine.png" class="machine" alt="">
+						<img src="./images/top/table-title.svg" class="sec-title" alt="">
+						<div class="title">
+							<!-- <img src="./images/top/table-line.png" class="line" alt="">
+							医療脱毛<span>と</span>エステ脱毛<span>の</span>違い -->
+							<img src="./images/top/table-title.png" alt="">
+						</div>
+						<div class="list">
+							<div class="column column1 ff-bold">
+								<div class="item first"></div>
+								<div class="item">脱毛種類</div>
+								<div class="item">脱毛期間</div>
+								<div class="item">安全性・痛み</div>
+								<div class="item">回数</div>
+								<div class="item">施術者</div>
+							</div>
+							<div class="column column2 ff-bold">
+								<div class="item first">ヴァージンクリニックの
+									<br/>医療脱毛</div>
+								<div class="item">
+									<div class="item-text">
+										厚労省承認の医療脱毛機
+									<br/>医療脱毛
+									</div>
+									<img src="./images/top/table-icon1.png" class="icon1" alt="">
+								</div>
+								<div class="item">
+									<div class="item-text">最短8ヶ月</div>
+									<img src="./images/top/table-icon1.png" class="icon1" alt="">
+								</div>
+								<div class="item">
+									<div class="item-text">ゴムを弾くような痛み</div>
+									<img src="./images/top/table-icon2.png" class="icon2" alt="">
+								</div>
+								<div class="item">
+									<div class="item-text">約5回</div>
+									<img src="./images/top/table-icon1.png" class="icon1" alt="">
+								</div>
+								<div class="item">
+									<div class="item-text">医師・看護師などの
+										<br/>有資格者</div>
+									<img src="./images/top/table-icon1.png" class="icon1" alt="">
+								</div>
+							</div>
+							<div class="column column3">
+								<div class="item first">一般的な
+									<br/>エステ脱毛</div>
+								<div class="item">
+									<div class="item-text">低出力の
+										<br/>光脱毛</div>
+									<img src="./images/top/table-icon2.png" class="icon1" alt="">
+								</div>
+								<div class="item">
+									<div class="item-text">約2年〜3年</div>
+									<img src="./images/top/table-icon2.png" class="icon1" alt="">
+								</div>
+								<div class="item">
+									<div class="item-text">じんわりとした痛み</div>
+									<img src="./images/top/table-icon1.png" class="icon2" alt="">
+								</div>
+								<div class="item">
+									<div class="item-text">約12回</div>
+									<img src="./images/top/table-icon2.png" class="icon1" alt="">
+								</div>
+								<div class="item">
+									<div class="item-text">無資格の
+										<br/>エステティシャン</div>
+									<img src="./images/top/table-icon2.png" class="icon1" alt="">
+								</div>
+							</div>
+						</div>
+						<div class="bottom-title ff-bold">
+							<p class="text">有資格者対応</p>
+							<img src="./images/top/table-close.png" class="icon-close" alt="">
+							<p class="text">半永久的脱毛効果を期待</p>
+						</div>
+						<div class="bottom">
+							
+							<p class="text2">短期集中で効率的に脱毛したいなら</p>
+							<img src="./images/top/table-title-r.svg" class="title-red" alt="">
+							<p class="text3">医療脱毛は医療用の強力なレーザーを使用し、効率的に脱毛できます。医療行為なので、資格を所持した医師や看護師などの医療従事者のみが施術を行うことが認められています。</p>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="question gs">
+				<div class="first">
+					<img src="./images/top/question-bg1.png" class="bg" alt="">
+					<img src="./images/top/question-person1.png" class="person" alt="">
+					<img src="./images/top/question-title1.png" class="title" alt="">
+					<div class="first-content ff-bold">
+						<p class="text1">医療脱毛は気になるけど、このような</p>
+						<!-- <p class="text2">お悩み<span class="text-s">ありませんか？</span></p> -->
+						<img src="./images/top/question-text2.png" class="text2" alt="">
+						<div class="list">
+							<div class="item">
+								<img src="./images/top/question-radio.png" class="item-icon" alt="">
+								<p class="item-text">毎日のお手入れが面倒
+								</p>
+							</div>
+							<div class="item">
+								<img src="./images/top/question-radio.png" class="item-icon" alt="">
+								<p class="item-text">青ヒゲが気になる</p>
+							</div>
+							<div class="item">
+								<img src="./images/top/question-radio.png" class="item-icon" alt="">
+								<p class="item-text">カミソリ負けによる肌トラブル</p>
+							</div>
+							<div class="item">
+								<img src="./images/top/question-radio.png" class="item-icon" alt="">
+								<p class="item-text">清潔感をアップしたい</p>
+							</div>
+							<div class="item">
+								<img src="./images/top/question-radio.png" class="item-icon" alt="">
+								<p class="item-text">脱毛時の痛みが心配</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="part1 point" id="jump2">
+					<img src="./images/top/question-bg2.png" class="bg" alt="">
+					<img src="./images/top/question-bg3.png" class="bg2" alt="">
+
+					<div class="part1-content">
+						<!-- <p class="text1">ヴァージンクリニックの医療脱毛が</p>
+						<p class="text2">選ばれる理由</p> -->
+						<img src="./images/top/part1-texts.png" class="part1-texts" alt="">
+						<div class="part1-top">
+							<img src="./images/top/question-one.svg" class="num" alt="">
+							<div class="texts ff-bold">
+								<p class="text3">医療脱毛特化でコストを削減!</p>
+								<p class="text4">適正価格<span class="ff-30">で</span>確かな
+									<br/>脱毛効果<span class="ff-30">を</span>実現</p>
+							</div>
+						</div>
+						<div class="video-wrap">
+							<video src="./images/top/question-video.mp4" class="question-video" controls muted poster="images/top/vid_pic.png"></video>
+						</div>
+						<p class="part1-tip">広告費などのコストを削減し、医療脱毛に特化したことでヒゲを含む顔全体の医療脱毛5回コースを77,000円(税込)での施術を実現しました。</p>
+					</div>
+				</div>
+				<div class="part2">
+					<img src="./images/top/part2-img1.png" class="part2-person" alt="">
+					<img src="./images/top/part2-img2.png" class="part2-machine" alt="">
+					<div class="part2-content">
+						<div class="part2-top">
+							<div class="texts ff-bold ff-bold">
+								<p class="text1">様々な毛質・肌質に対応</p>
+								<p class="text2">厚労省承認<span class="ff-30">の</span>
+									<br/>医療脱毛機</p>
+							</div>
+							<img src="./images/top/question-two.svg" class="num" alt="">
+						</div>
+						<div class="black ff-bold">
+							<p class="text3">ジェントルマックスプロ</p>
+							<p class="text4">2種類のレーザー</p>
+						</div>
+					
+						<div class="imgs">
+							<img src="./images/top/part2-img3.png" class="circle-y" alt="">
+							<img src="./images/top/part2-img4.png" class="circle-y" alt="">
+						</div>
+						<p class="part2-tip">厚生労働省承認のジェントルマックスプロを使用し、2種類のレーザーを使い分けることで様々な毛質・肌質に効率的な脱毛が可能になりました。</p>
+					</div>
+				</div>
+				<div class="part3">
+					<img src="./images/top/question-bg4.png" class="bg" alt="">
+					<div class="part3-content">
+						<div class="part3-top">
+							<img src="./images/top/question-three.svg" class="num" alt="">
+							<div class="texts ff-bold">
+								<p class="text1">プラン料金以外の費用は一切無し！
+									<br/>アフターケア無料の</p>
+								<p class="text2">安心サポート</p>
+							</div>
+						</div>
+						<div class="part3-middle">
+							<img src="./images/top/part3-img1.png" class="middle-img" alt="">
+							<div class="list ff-bold">
+								<div class="row">
+									<div class="item">初診料</div>
+									<div class="item">再診料</div>
+								</div>
+								<div class="item">キャンセル料金</div>
+								<div class="item">肌トラブル</div>
+								<div class="item">アフターケア</div>
+							</div>
+						</div>
+						<p class="part3-tip">初診料・再診料0円はもちろん、アフターケアや万が一の肌トラブル時も無料で対応いたします。</p>
+					</div>
+				</div>
+				<div class="part4">
+					<img src="./images/top/question-bg5.png" class="bg" alt="">
+					<div class="part4-content">
+						<div class="part4-top">
+							<div class="texts ff-bold">
+								<p class="text1">初めてでも安心！</p>
+								<p class="text2">気になる部位だけお試し</p>
+								<p class="text3">選べる脱毛プラン</p>
+							</div>
+							<img src="./images/top/question-four.svg" class="num" alt="">
+						</div>
+						<img src="./images/top/part4-img1.jpg" class="part4-img" alt="">
+						<p class="part4-tip">顔脱毛や全身脱毛の他にもヒゲ3部位セレクト脱毛プランやVIOなど部位を選んで脱毛できるプランをご用意しております。</p>
+					</div>
+				</div>
+			</div>
+			<div class="cold gs">
+				<img src="./images/top/cold-bg1.png" class="bg1" alt="">
+				<img src="./images/top/cold-bg2.png" class="bg2" alt="">
+				<img src="./images/top/cold-bg3.png" class="bg3" alt="">
+				<img src="./images/top/cold-person1.png" class="person1" alt="">
+				<div class="cold-content">
+					<img src="./images/top/cold-text1.png" class="text1" alt="">
+					<img src="./images/top/cold-text2.png" class="text2" alt="">
+					<img src="./images/top/cold-text3.png" class="text3" alt="">
+					<div class="cold-box">
+						<div class="white">
+							<img src="./images/top/cold-person2.png" class="person2" alt="">
+							<div class="texts">
+								<div class="line1 ff-bold">
+									<p class="text4">ヴァージンクリニックの
+										<br/>ジェントルマックスプロには、</p>
+									<p class="text5"><span class="text-b">痛み</span>を<span class="text-b">軽減</span>する</p>
+								</div>
+								<img src="./images/top/cold-text4.png" class="text6" alt="">
+								<img src="./images/top/cold-text5.png" class="text7" alt="">
+							</div>
+						</div>
+					</div>
+					<div class="cold-bottom">
+						<img src="./images/top/cold-img1.png" class="cold-img1" alt="">
+						<img src="./images/top/cold-img2.png" class="cold-img2" alt="">
+						<p class="text-inner">痛みが心配な方には麻酔クリームもご用意しておりますので、お気軽にお申し付けください。</p>
+					</div>
+					<p class="cold-tip">※麻酔クリームは一部位3,300円がかかります。<br class="visible-ts">※画像はイメージです。</p>
+				</div>
+			</div>
+			<div class="today gs">
+				<img src="./images/top/today-bg1.png" class="bg" alt="">
+				<div class="today-content">
+					<img src="./images/top/today-text1.png" class="text1" alt="">
+					<img src="./images/top/today-text2.png" class="text2" alt="">
+					<div class="list">
+						<img src="./images/top/today-img1.png" class="item item1" alt="">
+						<img src="./images/top/today-img2.png" class="item item2" alt="">
+						<img src="./images/top/today-img3.png" class="item item3" alt="">
+						<img src="./images/top/today-img4.png" class="item item4" alt="">
+					</div>
+					<div class="today-bottom">
+						<!-- <img src="./images/top/today-bg2.png" class="bg2" alt=""> -->
+						<p class="bottom-text ff-bold">カウンセリングだけでもOK! まずは無料相談！</p>
+						<div class="twoBtn">
+							<ul>
+								<li><a class="js-modal-open" data-modal="tel"><img src="./images/top/btn_tel02.png" alt=""></a></li>
+								<li><a class="js-modal-open" data-modal="line"><img src="./images/top/btn_line02.png" alt=""></a></li>
+							</ul>
+						</div>
+						<div class="right-btn today-btn purupuru"><img src="./images/top/today-btn.png" class="" alt=""></div>
+						
+					</div>
+				</div>
+			</div>
+			<div class="body gs point" id="jump3">
+				<img src="./images/top/body-bg.png" class="bg" alt="">
+				<div class="body-content">
+					<img src="./images/top/body-text1.png" class="text1" alt="">
+					<img src="./images/top/body-text2.png" class="text2" alt="">
+					<img src="./images/top/body-img1.png" class="body-img1" alt="">
+					<div class="item ff-bold">
+						<p class="item-title">顔全体医療脱毛</p>
+						<div class="white">
+							<p class="item-text">額・頬・鼻下・顎・顎下の顔全体と首を脱毛</p>
+							<div class="line">
+								<div class="item-s item-s1">
+									<p class="black">5回</p>
+									<img src="./images/top/body-num1.png" class="num" alt="">
+								</div>
+								<div class="item-s item-s2">
+									<p class="black">8回</p>
+									<img src="./images/top/body-num2.png" class="num" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
+					
+					<div class="item ff-bold">
+						<p class="item-title">ヒゲ3部位セレクト脱毛プラン</p>
+						<div class="white">
+							<p class="item-text">額・頬・鼻下・顎＋顎下・首から3部位を選べるプラン</p>
+							<div class="line">
+								<div class="item-s item-s1">
+									<p class="black">5回</p>
+									<img src="./images/top/body-num3.png" class="num" alt="">
+								</div>
+								<div class="item-s item-s2">
+									<p class="black">8回</p>
+									<img src="./images/top/body-num4.png" class="num" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="item">
+						<p class="item-title">全身パーフェクトプラン</p>
+						<div class="white">
+							<p class="item-text">顔とVIOを含む全ての全身部位を<br class="visible-ts">パーフェクトに脱毛できるプラン</p>
+							<div class="line">
+								<div class="item-s item-s1">
+									<p class="black">5回</p>
+									<img src="./images/top/body-num5.png" class="num" alt="">
+								</div>
+								<div class="item-s item-s2">
+									<p class="black">8回</p>
+									<img src="./images/top/body-num6.png" class="num" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="item ff-bold">
+						<p class="item-title">ドクターセレクト全身脱毛プラン</p>
+						<div class="white">
+							<p class="item-text">見えるところのみまるごと脱毛できるプラン</p>
+							<div class="line">
+								<div class="item-s item-s1">
+									<p class="black">5回</p>
+									<img src="./images/top/body-num7.png" class="num" alt="">
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					<div class="item ff-bold">
+						<p class="item-title">全身脱毛プラン</p>
+						<div class="white">
+							<p class="item-text">顔・VIOを除く全身を脱毛できるプラン</p>
+							<div class="line">
+								<div class="item-s item-s1">
+									<p class="black">5回</p>
+									<img src="./images/top/body-num8.png" class="num" alt="">
+								</div>
+								<div class="item-s item-s2">
+									<p class="black">8回</p>
+									<img src="./images/top/body-num9.png" class="num" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="item ff-bold">
+						<p class="item-title">VIO脱毛</p>
+						<div class="white">
+							<p class="item-text">VIO（デリケートゾーン）の脱毛プラン</p>
+							<div class="line">
+								<div class="item-s item-s1">
+									<p class="black">5回</p>
+									<img src="./images/top/body-num10.png" class="num" alt="">
+								</div>
+								<div class="item-s item-s2">
+									<p class="black">8回</p>
+									<img src="./images/top/body-num11.png" class="num" alt="">
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="bottom">
+						<div class="blue">
+							<p class="bottom-title ff-bold">その他の部位別脱毛</p>
+							<img src="./images/top/body-add.png" class="icon" alt="">
+						</div>
+						<div class="list">
+							<img src="./images/top/body-list.png" alt="">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="carousel gs point" id="jump4">
+				<img src="./images/top/swiper-bg.png" class="bg" alt="">
+				<div class="carousel-content">
+					<img src="./images/top/swiper-text1.png" class="title" alt="">
+					<div class="carousel-middle">
+						<div class="swiper-container swiper1">
+							<div class="swiper-wrapper">
+								<div class="swiper-slide">
+									<img src="./images/top/swiper-img1.png" class="slide-img" alt="">
+									<div class="slide-title">
+										<img src="./images/top/swiper-step1.png" class="step" alt="">
+										<div class="text1 ff-bold">ご来店・受付</div>
+									</div>
+									<p class="text2">WEBフォームからご希望のカウンセリング予約をお申し込みいただき、当日店舗へお越しください。</p>
+								</div>
+								<div class="swiper-slide">
+									<img src="./images/top/swiper-img2.png" class="slide-img" alt="">
+									<div class="slide-title">
+										<img src="./images/top/swiper-step2.png" class="step" alt="">
+										<div class="text1 ff-bold">無料カウンセリング</div>
+									</div>
+									<p class="text2">担当のカウンセラーから施術のご説明やお肌の状態やお悩みに合ったプランのご提案をいたします。</p>
+								</div>
+								<div class="swiper-slide">
+									<img src="./images/top/swiper-img3.png" class="slide-img" alt="">
+									<div class="slide-title">
+										<img src="./images/top/swiper-step3.png" class="step" alt="">
+										<div class="text1 ff-bold">医療脱毛施術日を予約</div>
+									</div>
+									<p class="text2">ご納得いただければ次回の施術のご予約をお取りいたします。
+										ご相談のみのご利用も可能ですのでお気軽にお越しください。</p>
+								</div>
+							</div>
+							
+							<div class="swiper-pagination"></div>
+						</div>
+						<div class="swiper-button-prev">
+							<img src="./images/top/arrow-left.png" alt="">
+						</div>
+						<div class="swiper-button-next">
+							<img src="./images/top/arrow-right.png" alt="">
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="indoor gs point" id="jump5">
+				<img src="./images/top/table-bg2.png" class="bg" alt="">
+				<div class="indoor-content">
+					<img src="./images/top/indoor-text1.png" class="text1" alt="">
+					<div class="click-title click-title1 ff-bold">京都院
+						<img src="./images/top/body-add.png" class="icon-add" alt="">
+					</div>
+					<div class="click-content">
+						<div class="click-content-inner">
+							<img src="./images/top/indoor-img1.png" class="left-img" alt="">
+							<div class="texts">
+								<p class="text2 ff-bold">京都院</p>
+								<p class="text3">〒604-8073
+									<br/>京都府京都市中京区大黒町71 
+									<br/>イーグルコート京都六角雅心庵 2F
+									<br/>電話番号：075-708-8113
+									<br/>診療時間：10:00～19:00
+									<br/>休診日：なし</p>
+							</div>
+						</div>
+						
+					</div>
+					<div class="click-title ff-bold">広島院
+						<img src="./images/top/body-add.png" class="icon-add" alt="">
+					</div>
+					<div class="click-content">
+						<div class="click-content-inner">
+							<img src="./images/top/indoor-img2.png" class="left-img" alt="">
+							<div class="texts">
+								<p class="text2 ff-bold">広島院</p>
+								<p class="text3">〒730-0051
+									<br/>広島県広島市中区大手町1-4-1 
+									<br/>平田ビル 3F
+									<br/>電話番号：082-207-0007
+									<br/>診療時間：10:00～19:00
+									<br/>休診日：なし</p>
+							</div>
+						</div>
+						
+					</div>
+					<div class="click-title ff-bold">福岡天神院
+						<img src="./images/top/body-add.png" class="icon-add" alt="">
+					</div>
+					<div class="click-content">
+						<div class="click-content-inner">
+							<img src="./images/top/indoor-img3.png" class="left-img" alt="">
+							<div class="texts">
+								<p class="text2 ff-bold">福岡天神院</p>
+								<p class="text3">〒810-0021
+									<br/>福岡県福岡市中央区今泉2-5-28 
+									<br/>ノイラ天神 2F
+									<br/>電話番号：092-791-3912
+									<br/>診療時間：10:00～19:00
+									<br/>休診日：なし</p>
+							</div>
+						</div>
+						
+					</div>
+				</div>
+			</div>
+			<div class="count gs point" id="jump6">
+				<img src="./images/top/count-bg.png" class="bg" alt="">
+				<div class="count-content">
+					<img src="./images/top/count-text1.png" class="title" alt="">
+					<div class="click-title ff-bold">
+						<img src="./images/top/count-q.png" class="letter" alt="">
+						<p class="text1">医療脱毛が初めてなのですが、
+							<br/>ヒゲ脱毛は痛いですか？</p>
+						<img src="./images/top/body-add.png" class="icon-add" alt="">
+					</div>
+					<div class="click-content-wrap">
+						<div class="click-content">
+							<img src="./images/top/count-a.png" class="letter" alt="">
+							<p class="text2">痛みの感じ方には個人差がありますが、ヒゲは毛が太く濃いため、一般的には痛みを感じやすいと言われている部位です。ですが、当院で使用する医療脱毛機「ジェントルマックスプロ」は、痛みへの対策としてガスによる冷却システムが搭載されているため、痛みを最小限に抑えることが可能です。また、痛みを和らげる麻酔クリーム（一部位3,300円）を塗布しての施術が可能ですので、痛みに弱い・不安な方はご相談ください。</p>
+						</div>
+					</div>
+					
+					<div class="click-title ff-bold">
+						<img src="./images/top/count-q.png" class="letter" alt="">
+						<p class="text1">青ヒゲがコンプレックスなのですが、
+							改善はできますか？</p>
+						<img src="./images/top/body-add.png" class="icon-add" alt="">
+					</div>
+					<div class="click-content-wrap">
+						<div class="click-content">
+							<img src="./images/top/count-a.png" class="letter" alt="">
+							<p class="text2">青ヒゲは、ヒゲ剃り後の毛の断面が太く見えたり、皮膚の中に埋まっている毛が透けて見えることで青く見えたりするのが原因です。ですので、脱毛することでヒゲが無くなり、結果的に青ヒゲの改善が期待できます。</p>
+						</div>
+					</div>
+					
+					<div class="click-title ff-bold">
+						<img src="./images/top/count-q.png" class="letter" alt="">
+						<p class="text1">ツルツルではなく、毛の量を
+							<br/>減らしたいのですが可能でしょうか？</p>
+						<img src="./images/top/body-add.png" class="icon-add" alt="">
+					</div>
+					<div class="click-content-wrap">
+						<div class="click-content">
+							<img src="./images/top/count-a.png" class="letter" alt="">
+							<p class="text2">はい。照射する回数を調整することである程度の毛を残すことも可能です。毛の状態や部位によって脱毛プランが異なりますので、カウンセリング時にご相談いただければ、最適なプランや回数をご提案いたします。お気軽にお声掛けください。</p>
+						</div>
+					</div>
+					
+				</div>
+			</div>
+			<div class="data gs point" id="jump7">
+				<img src="./images/top/data-bg.png" class="bg" alt="">
+				<div class="data-content">
+					<img src="./images/top/data-text1.png" class="text1" alt="">
+					<div class="twoBtn">
+						<ul>
+							<li><a class="js-modal-open" data-modal="tel"><img src="./images/top/btn_tel02.png" alt=""></a></li>
+							<li><a class="js-modal-open" data-modal="line"><img src="./images/top/btn_line02.png" alt=""></a></li>
+						</ul>
+					</div>
+					<?php
+                        switch ($page) {
+                            case FMAIL_FORM:
+                    ?>
+                    	<p class="text2 ff-medi">以下のフォームに必要事項をご記入の上、<br>確認ボタンをクリックして下さい。<br>内容を確認した後、<br class="visible-ts">担当者よりお返事いたします。</p>
+						<p class="text3">※が付いている項目は必須項目になります。</p>
+						<form name="form" action="#jump7" method="post" id="myform">
+					    	<input type="hidden" name="action" value="action" />
+							<dl class="line line1">
+								<dt class="line-text red">希望クリニック<sup>※</sup></dt>
+								<dd>
+									<div class="line-right">
+										<select name="parm[method]" id="" >
+											<option value="" disabled selected>クリニックを選択</option>
+											<?php
+												$content01='';
+												$select01=array('京都院','広島院','福岡天神院');
+												foreach ($select01 as $key=>$value){
+													$content01.='<option value="'.$value.'" ';
+													if($value==@$parm['method']){
+														$content01.=' selected="">'.$value.'</option>';
+													}else {
+														$content01.= '>'.$value.'</option>';
+													}
+												}
+												echo $content01;
+											?>
+										</select>
+										
+									</div>
+									<p class="err_mess"><?php echo $error_method; ?></p>
+								</dd>
+							</dl>
+							<dl class="line line2">
+								<dt class="line-text red">予約希望日時（第1希望）<sup>※</sup></dt>
+								<dd>
+									<div class="line-right line-datetime">
+										<p class="item form-date"><input type="date" name="parm[dateform]" value="<?php echo @$parm['dateform']; ?>" placeholder="2024/03/13"></p>
+										
+										<p class="item"><select name="parm[time]" id="" >
+											<option value="" disabled selected></option>
+											<?php
+												$content02='';
+												$select02=array('10:00','11:00','12:00', '13:00','14:00','15:00','16:00','17:00','18:00');
+												foreach ($select02 as $key=>$value){
+													$content02.='<option value="'.$value.'" ';
+													if($value==@$parm['time']){
+														$content02.=' selected="">'.$value.'</option>';
+													}else {
+														$content02.= '>'.$value.'</option>';
+													}
+												}
+												echo $content02;
+											?>
+										</select></p>
+									</div>
+									<p class="err_mess"><?php echo $error_datetime; ?></p>
+								</dd>
+							</dl>
+							<dl class="line line3">
+								<dt class="line-text red">予約希望日時（第2希望）<sup>※</sup></dt>
+								<dd>
+									<div class="line-right line-datetime">
+										<p class="item form-date"><input type="date" name="parm[dateform02]" value="<?php echo @$parm['dateform02']; ?>" placeholder="2024/03/13"></p>
+										<p class="item"><select name="parm[time02]" id="" >
+											<option value="" disabled selected></option>
+											<?php
+												$content03='';
+												$select03=array('10:00','11:00','12:00', '13:00','14:00','15:00','16:00','17:00','18:00');
+												foreach ($select03 as $key=>$value){
+													$content03.='<option value="'.$value.'" ';
+													if($value==@$parm['time02']){
+														$content03.=' selected="">'.$value.'</option>';
+													}else {
+														$content03.= '>'.$value.'</option>';
+													}
+												}
+												echo $content03;
+											?>
+										</select></p>
+									</div>
+									<p class="err_mess"><?php echo $error_datetime02; ?></p>
+								</dd>
+							</dl>
+							<dl class="line line4">
+								<dt class="line-text red">お名前<sup>※</sup></dt>
+								<dd>
+									<div class="line-right">
+										<input type="text" name="parm[name]" value="<?php echo @$parm['name']; ?>" placeholder="京都 花子">
+									</div>
+									<p class="err_mess"><?php echo $error_name; ?></p>
+								</dd>
+								
+							</dl>
+							<dl class="line line5">
+								<dt class="line-text red">年齢<sup>※</sup></dt>
+								<dd>
+									<div class="line-right">
+										<input type="text" name="parm[age]" value="<?php echo @$parm['age']; ?>" placeholder="例）20">
+										<p class="age">歳</p>
+									</div>
+									<p class="err_mess"><?php echo $error_age; ?></p>
+								</dd>
+								
+							</dl>
+							<dl class="line line6">
+								<dt class="line-text red">電話番号<sup>※</sup></dt>
+								<dd>
+									<div class="line-right">
+										<input type="tel" name="parm[tel]" value="<?php echo @$parm['tel']; ?>" placeholder="08012345678">
+									</div>
+									<p class="err_mess"><?php echo $error_tel; ?></p>
+								</dd>
+							</dl>
+							<dl class="line line7">
+								<dt class="line-text red">メールアドレス<sup>※</sup></dt>
+								<dd>
+									<div class="line-right">
+										<input type="email" name="parm[email]" value="<?php echo @$parm['email']; ?>" placeholder="virgin@example.com">
+										
+									</div>
+									<p class="err_mess"><?php echo $error_email; ?></p>
+								</dd>
+								
+							</dl>
+							<dl class="line line8">
+								<dt class="line-text">ご希望の施術</dt>
+								<dd>
+									<div class="line-right">
+										<input type="text" name="parm[treatment]" value="<?php echo @$parm['treatment']; ?>" placeholder="">
+									</div>
+								</dd>
+							</dl>
+							<dl class="line line9">
+								<dt class="line-text">お問合せ内容</dt>
+								<dd>
+									<div class="line-right">
+										<textarea name="parm[content]" id="" cols="30" rows="10" placeholder="ご希望のメニューや、ご質問・ご要望がございましたらご記入ください。"><?php echo @$parm['content']; ?></textarea>
+									</div>
+								</dd>
+							</dl>
+							<div class="privacy">
+								<div class="check">
+									<?php
+	                                    $content04="";
+	                                    $split="";
+	                                    $checked= @$parm['acceptance'];
+	                                    $name = array('agree');
+	                                    $checkbox=array('<a href="https://v-clinic.jp/privacy-policy/" class="link" target="_blank">プライバシーポリシーに同意する</a>');
+	                                    $i=0;
+
+	                                        foreach ((array) $checkbox as $key=>$value){
+	                                            if(is_array($name)){
+	                                                $content04.="<label><input name='parm[acceptance][{$name[$key]}]' id='checkbox01' type='checkbox' class='checkbox01-input' value='".$name[$key]."'";
+	                                            }else {
+	                                                $content04.="<label><input name='parm[acceptance][{$name[$key]}]' id='checkbox01' type='checkbox' class='checkbox01-input' value='".$name[$key]."'";
+	                                            }
+	                                            $i++;
+	                                            $flag=false;
+	                                            foreach ((array) $checked as $k=>$v){
+	                                                if($name[$key]==$v){
+	                                                    $flag=true;
+	                                                }
+	                                            }
+	                                            if($flag){
+	                                                $content04.=" checked><span class='checkbox01-parts'>$value</span></label>";
+	                                            }else {
+	                                                $content04.="><span class='checkbox01-parts'>$value</span></label>";
+	                                            }
+	                                            $content04=$content04.$split;
+	                                        }
+	                                    echo $content04;
+	                                ?>
+	                                <p class="err_mess"><?php echo $error_acceptance; ?></p>
+								</div>
+								
+							</div>
+							<div class="btn">
+								<!-- <img src="./images/top/data-btn.png" alt=""> -->
+								<input type="submit" id="send" value="確認画面へ">
+							</div>
+							<div class="bottom">
+								<div class="white">
+									<p class="text4 ff-bold">未成年の方へ</p>
+									<p class="text5">未成年の方が施術を受ける際には親権者（保護者）の同意が必要となります。下記ボタンより同意書をダウンロード、印刷していただき、必要事項を記入し捺印の上お持ちください。</p>
+									<a href="https://v-clinic.jp/file/未成年者同意書.pdf" class="link2" target="_blank">
+										<img src="./images/top/data-btn2.png" alt="">
+									</a>
+								</div>
+							</div>
+						</form>
+					<?php
+                        break;
+                        case FMAIL_PRIVE:
+                    ?>
+                    	<p class="text2 ff-medi fcRed">まだ送信は完了していません。<br/>内容をご確認の上、<br class="visible-ts">送信するボタンを押してください。</p>
+                    	<form name="form" action="#jump7" method="post" id="myform">
+					    	<input id="action" type="hidden" name="action" value="action" />
+				    		<input type="hidden" name="parm[method]" value="<?php echo @$parm['method'] ?>" />
+				    		<input type="hidden" name="parm[dateform]" value="<?php echo @$parm['dateform'] ?>" />
+				    		<input type="hidden" name="parm[time]" value="<?php echo @$parm['time'] ?>" />
+				    		<input type="hidden" name="parm[dateform02]" value="<?php echo @$parm['dateform02'] ?>" />
+				    		<input type="hidden" name="parm[time02]" value="<?php echo @$parm['time02'] ?>" />
+				    		<input type="hidden" name="parm[name]" value="<?php echo @$parm['name'] ?>" />
+				    		<input type="hidden" name="parm[age]" value="<?php echo @$parm['age'] ?>" />
+				    		<input type="hidden" name="parm[tel]" value="<?php echo @$parm['tel'] ?>" />
+				    		<input type="hidden" name="parm[email]" value="<?php echo @$parm['email'] ?>" />
+                            <input type="hidden" name="parm[treatment]" value="<?php echo @$parm['treatment'] ?>" />
+                            <input type="hidden" name="parm[content]" value="<?php echo @$parm['content'] ?>" />
+                            <?php if($parm['acceptance']):?>
+                                    <?php foreach($parm['acceptance'] as $key => $valuez):?>
+                                        <?php if($valuez):?>
+                                            <input type="hidden" name="parm[acceptance][<?php echo $key?>]" value="<?php echo $key?>" />
+                                        <?php endif;?>
+                                    <?php endforeach;?>
+                                <?php endif;?>
+							<dl class="line line1">
+								<dt class="line-text red">希望クリニック<sup>※</sup></dt>
+								<dd>
+									<div class="line-right">
+										<?php echo @$parm['method']; ?>
+									</div>
+								</dd>
+							</dl>
+							<dl class="line line2">
+								<dt class="line-text red">予約希望日時（第1希望）<sup>※</sup></dt>
+								<dd>
+									<div class="line-right">
+										<?php echo @$parm['dateform']; ?>
+										<?php echo @$parm['time']; ?>
+										
+									</div>
+								</dd>
+							</dl>
+							<dl class="line line3">
+								<dt class="line-text red">予約希望日時（第2希望）<sup>※</sup></dt>
+								<dd>
+									<div class="line-right">
+										<?php echo @$parm['dateform02']; ?>
+										<?php echo @$parm['time02']; ?>
+									</div>
+								</dd>
+							</dl>
+							<dl class="line line4">
+								<dt class="line-text red">お名前<sup>※</sup></dt>
+								<dd>
+									<div class="line-right">
+										<?php echo @$parm['name']; ?>
+									</div>
+								</dd>
+								
+							</dl>
+							<dl class="line line5">
+								<dt class="line-text red">年齢<sup>※</sup></dt>
+								<dd>
+									<div class="line-right">
+										<?php echo @$parm['age']; ?>
+									</div>
+								</dd>
+								
+							</dl>
+							<dl class="line line6">
+								<dt class="line-text red">電話番号<sup>※</sup></dt>
+								<dd>
+									<div class="line-right">
+										<?php echo @$parm['tel']; ?>
+									</div>
+								</dd>
+							</dl>
+							<dl class="line line7">
+								<dt class="line-text red">メールアドレス<sup>※</sup></dt>
+								<dd>
+									<div class="line-right">
+										<?php echo @$parm['email']; ?>
+									</div>
+								</dd>
+								
+							</dl>
+							<dl class="line line8">
+								<dt class="line-text">ご希望の施術</dt>
+								<dd>
+									<div class="line-right">
+										<?php echo @$parm['treatment']; ?>
+									</div>
+								</dd>
+							</dl>
+							<dl class="line line9">
+								<dt class="line-text">お問合せ内容</dt>
+								<dd>
+									<div class="line-right">
+										<?php echo @$parm['content']; ?>
+									</div>
+								</dd>
+							</dl>
+							<div class="privacy">
+								<div class="check">
+									同意する
+								</div>
+								
+							</div>
+							<div class="btn">
+								<input type="submit" id="edit" value="入力画面へ戻る">
+								<input type="submit" id="submit" value="送信する">
+
+							</div>
+							<div class="bottom">
+								<div class="white">
+									<p class="text4 ff-bold">未成年の方へ</p>
+									<p class="text5">未成年の方が施術を受ける際には親権者（保護者）の同意が必要となります。下記ボタンより同意書をダウンロード、印刷していただき、必要事項を記入し捺印の上お持ちください。</p>
+									<a href="https://v-clinic.jp/file/未成年者同意書.pdf" class="link2" target="_blank">
+										<img src="./images/top/data-btn2.png" alt="">
+									</a>
+								</div>
+							</div>
+						</form>
+                    <?php
+                    break;
+                    case FMAIL_THANK:
+                    ?>
+						<script type="text/javascript">
+                            $(function(){
+                                window.location.href='thanks.html';
+                            });
+                        </script>
+                    <?php
+                        break;}
+                    ?>
+				</div>
+			</div>
+			<div class="footer">
+				© Virgin Clinic.
+			</div>
+		</div>
+
+	</section>
+	<!-- end content -->
+
+	<section class="pageTop">
+		<!-- <p class="pageTopimg"><a href="#" class="op"><img src="images/common/pageTop.jpg" alt=""></a></p> -->
+	</section>
+	<section>
+		<div class="side"></div>
+	</section>
+	<footer>
+		<!-- /#footer --> 
+	</footer>
+	<div class="modal js-modal js-modal-tel" style="display: none;">
+		<div class="modal-container">
+			<div class="modal-header">電話でのご予約・お問い合わせ</div>
+			<div class="modal-content">
+				<p>お問い合わせ先をお選びください。</p>
+				<div class="modal-links">
+					<a href="tel:0757088113"><i class="fas fa-phone-alt"></i>京都院</a>
+					<a href="tel:0822070007"><i class="fas fa-phone-alt"></i>広島院</a>
+					<a href="tel:0927913912"><i class="fas fa-phone-alt"></i>福岡天神院</a>
+				</div>
+				<div class="modal-buttons">
+					<button class="js-modal-button" type="button" name="modal-cancel">閉じる</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="modal js-modal js-modal-line" style="display: none;">
+		<div class="modal-container">
+			<div class="modal-header">LINEでのご予約・お問い合わせ</div>
+			<div class="modal-content">
+				<p>お問い合わせ先をお選びください。</p>
+				<div class="modal-links">
+					<a href="https://lin.ee/VF6ZJcz" target="_blank" rel="noopener noreferrer"><i class="fab fa-line"></i>京都院</a>
+					<a href="https://lin.ee/xK91SKl" target="_blank" rel="noopener noreferrer"><i class="fab fa-line"></i>広島院</a>
+					<a href="https://lin.ee/XBQb1CI" target="_blank" rel="noopener noreferrer"><i class="fab fa-line"></i>福岡天神院</a>
+				</div>
+				<div class="modal-buttons">
+					<button class="js-modal-button" type="button" name="modal-cancel">閉じる</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<!-- /#wrapper -->
+<script type="text/javascript">
+	$(document).ready(function() {
+        $("#edit").click(function(){
+            $("#action").val('edit');
+            $('.left-item[data-target="#jump7"]').addClass('active');
+        });
+        $("#submit").click(function(){
+            $("#action").val('submit');
+        });
+
+        $('#reset_form').on('click', function()
+        { 
+            $('#myform').find('input:text, select, textarea').val('');
+            $('#myform').find('input:radio, input:checkbox').prop('checked', false);
+        });
+
+        $('input[name="acceptance[]"]').on('click',function(){
+            var acceptance=[];
+            $('input[name="parm[acceptance]"]').val('');
+            $('input[name="acceptance[]"]:checked').each(function(){
+                acceptance.push($(this).val());
+                $('input[name="parm[acceptance]"]').val(acceptance);
+            });
+        });
+
+        // $('.data').each(function() {
+		// 	$('.left-item').removeClass('active');
+		// 	var id = $(this).attr('id');
+		// 	$('.data').addClass('active');
+		// 	$(`.left-item[data-target="#${id}"]`).addClass('active');
+		// 	var targetY = $('#jump7').offset().top;
+		// 	var parent = 'html,body';
+		// 		$(parent).animate({scrollTop: targetY},400);
+		// 	return false;
+		// });	
+
+        // $('.active.scroll').each(function() {
+        // 	$('.left-item').removeClass('active');
+		// 	var target = $('.data').attr('id');
+		// 	$(`.left-item[data-target="#${target}"]`).addClass('active');
+		// 	$('html, body').animate({scrollTop:$('#jump7').position().top}, 800);
+		// });	
+		
+        
+    });
+</script>
+</body>
+</html>

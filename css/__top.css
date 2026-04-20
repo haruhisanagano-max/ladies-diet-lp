@@ -678,16 +678,17 @@
 .question .part5 {
     position: relative;
     z-index: 3;
-    margin-top: -100px; /* ここを追加：前のパーツと重ねる */
+    margin-top: -100px;
     padding-bottom: 60px;
+    overflow: hidden; /* 背景がはみ出さないように */
 }
 .question .part5 .bg {
     position: absolute;
     width: 100%;
-    height: 100%; /* ここを追加：背景を出し切る */
-    object-fit: cover;
-    bottom: 0;
+    height: 100%; /* 高さを100%に強制 */
+    top: 0;
     left: 0;
+    object-fit: cover;
 }
 .question .part5 .part5-content {
     padding-top: 76px;
@@ -747,7 +748,7 @@
 }
 
 /* --- 理由③・④：注射・内服（共通デザインを3と4両方に適用） --- */
-.question .part3,
+..question .part3,
 .question .part4 {
     position: relative;
     z-index: 2;
@@ -759,7 +760,7 @@
     width: 100%;
     height: 100%;
     position: absolute;
-    bottom: 0;
+    top: 0;
     left: 0;
     object-fit: cover;
 }
@@ -1873,6 +1874,10 @@ input[type="checkbox"]:checked:after {
     position: relative;
     z-index: 3;
 }
+	.question .part5 .bg {
+        height: 100%; /* スマホでも高さを確保 */
+        top: 0;
+    }
     .question .part5 .part5-top {
         margin-left: 14.666667vw;
     }

@@ -674,138 +674,125 @@
     top: 0;
 }
 
-/* --- ここから貼り付け：理由⑤：明瞭会計（旧part3のデザインを5に適用） --- */
-.question .part5 {
+.question .part3{
     position: relative;
     z-index: 3;
-    margin-top: -100px;
     padding-bottom: 60px;
-    overflow: hidden; /* 背景がはみ出さないように */
 }
-.question .part5 .bg {
+.question .part3 .bg{
     position: absolute;
     width: 100%;
-    height: 100%; /* 高さを100%に強制 */
-    top: 0;
-    left: 0;
     object-fit: cover;
+    bottom: 0;
+    left: 0;
 }
-.question .part5 .part5-content {
+.question .part3 .part3-content{
     padding-top: 76px;
     position: relative;
     z-index: 2;
     color: #fff;
 }
-.question .part5 .part5-top {
+.question .part3 .part3-top{
     display: flex;
     margin-left: 100px;
 }
-.question .part5 .num {
+.question .part3 .num{
     width: 120px;
 }
-.question .part5 .text1 {
+.question .part3 .text1{
     font-size: 25px;
     line-height: 1.3;
 }
-.question .part5 .text2 {
+.question .part3 .text2{
     font-size: 40px;
     line-height: 1.2;
 }
-.question .part5 .part5-middle {
+.question .part3 .part3-middle{
     margin-top: 15px;
     display: flex;
     margin-left: 88px;
 }
-.question .part5 .middle-img {
+.question .part3 .middle-img{
     width: 360px;
 }
-.question .part5 .list {
+.question .part3  .list{
     font-size: 18px;
     color: #000;
     letter-spacing: -1.5px;
 }
-.question .part5 .row {
+.question .part3 .row{
     display: flex;
 }
-.question .part5 .row .item {
+.question .part3 .row .item{
     flex: 1;
 }
-.question .part5 .row .item:nth-of-type(2) {
+.question .part3 .row .item:nth-of-type(2){
     margin-left: 7px;
 }
-.question .part5 .item {
+.question .part3 .item{
     background-image: linear-gradient(to right,#EFD270,#FFE4A8,#764900);
     margin-top: 7px;
     text-align: center;
     line-height: 35px;
     padding: 0 22px;
 }
-.question .part5 .part5-tip {
+.question .part3 .part3-tip{
     font-size: 16px;
     line-height: 1.7;
     width: 550px;
     margin: 25px auto 0;
 }
-
-/* --- 理由③・④：注射・内服（共通デザインを3と4両方に適用） --- */
-..question .part3,
-.question .part4 {
+.question .part4{
     position: relative;
     z-index: 2;
     margin-top: -100px;
     padding-bottom: 105px;
 }
-.question .part3 .bg,
-.question .part4 .bg {
+.question .part4 .bg{
     width: 100%;
     height: 100%;
     position: absolute;
-    top: 0;
+    bottom: 0;
     left: 0;
     object-fit: cover;
 }
-.question .part3 .part3-content,
-.question .part4 .part4-content {
+.question .part4 .part4-content{
     padding-top: 80px;
     position: relative;
     z-index: 2;
     color: #fff;
 }
-.question .part3 .part3-top,
-.question .part4 .part4-top {
+.question .part4 .part4-top{
     display: flex;
     margin-right: 95px;
     justify-content: flex-end;
 }
-.question .part3 .texts,
-.question .part4 .texts {
+.question .part4 .texts{
     text-align: right;
 }
-.question .part3 .text1, .question .part4 .text1,
-.question .part3 .text2, .question .part4 .text2 {
+.question .part4 .text1{
     font-size: 25px;
 }
-.question .part3 .text3, .question .part4 .text3 {
+.question .part4 .text2{
+    font-size: 25px;
+}
+.question .part4 .text3{
     font-size: 40px;
 }
-.question .part3 .num,
-.question .part4 .num {
+.question .part4 .num{
     width: 120px;
     margin-left: 13px;
 }
-.question .part3 .part3-img,
-.question .part4 .part4-img {
+.question .part4 .part4-img{
     width: 550px;
     margin: 10px auto 0;
 }
-.question .part3 .part3-tip,
-.question .part4 .part4-tip {
+.question .part4 .part4-tip{
     font-size: 16px;
     line-height: 1.7;
     width: 550px;
     margin: 20px auto 0;
 }
-/* --- ここまで貼り付け --- */
 .cold {
     position: relative;
     margin-top: -100px;
@@ -1864,99 +1851,85 @@ input[type="checkbox"]:checked:after {
         width: 42.4vw;
         bottom: 3.333333vw;
     }
-   /* --- 理由⑤：明瞭会計（旧part3のデザインを5に引っ越し） --- */
-    .question .part5 .part5-content {
+    .question .part3 .part3-content{
         padding-top: 14.133333vw;
     }
-   .question .part5 {
-    padding-bottom: 8vw;
-    margin-top: -13.333333vw; /* ここを追加：スマホ用の重なり */
-    position: relative;
-    z-index: 3;
-}
-	.question .part5 .bg {
-        height: 100%; /* スマホでも高さを確保 */
-        top: 0;
+    .question .part3{
+        padding-bottom: 8vw;
     }
-    .question .part5 .part5-top {
+    .question .part3 .part3-top{
         margin-left: 14.666667vw;
     }
-    .question .part5 .num {
+    .question .part3 .num{
         width: 16vw;
     }
-    .question .part5 .text1 {
+    .question .part3 .text1{
         font-size: 16px;
     }
-    .question .part5 .text2 {
+    .question .part3 .text2{
         font-size: 22px;
     }
-    .question .part5 .part5-middle {
+    .question .part3 .part3-middle{
         margin-top: 2vw;
         margin-left: 11.733333vw;
     }
-    .question .part5 .middle-img {
+    .question .part3 .middle-img{
         width: 48vw;
     }
-    .question .part5 .list {
+    .question .part3 .list{
         font-size: 2.4vw;
         letter-spacing: -1px;
     }
-    .question .part5 .item {
+    .question .part3 .item{
         margin-top: .933333vw;
         line-height: 4.666667vw;
         padding: 0 2.933333vw;
     }
-    .question .part5 .row .item:nth-of-type(2) {
+    .question .part3 .row .item:nth-of-type(2){
         margin-left: .933333vw;
     }
-    .question .part5 .part5-tip {
+    .question .part3 .part3-tip{
         margin-top: 3.333333vw;
         font-size: min(3vw, 14px);
         padding: 0 9.333333vw;
         width: auto;
     }
-
-    /* --- 理由③・④：注射・内服（共通デザインを3と4に適用） --- */
-    .question .part3,
-    .question .part4 {
+    .question .part4{
         padding-bottom: 14vw;
         margin-top: -13.333333vw;
     }
-    .question .part3 .part3-content,
-    .question .part4 .part4-content {
+    .question .part4 .part4-content{
         padding-top: 10.666667vw;
     }
-    .question .part3 .part3-top,
-    .question .part4 .part4-top {
+    .question .part4 .part4-top{
         margin-right: 12.666667vw;
     }
-    .question .part3 .text1, .question .part4 .text1 {
+    .question .part4 .text1{
         font-size: 16px;
     }
-    .question .part3 .text2, .question .part4 .text2 {
+    .question .part4 .text2{
         font-size: 20px;
     }
-    .question .part3 .text3, .question .part4 .text3 {
+    .question .part4 .text3{
         font-size: 5.333333vw;
     }
-    .question .part3 .num, .question .part4 .num {
+    .question .part4 .num{
         width: 16vw;
         margin-left: 1.733333vw;
     }
-    .question .part3 .part3-img, .question .part4 .part4-img {
+    .question .part4 .part4-img{
         width: 73.333333vw;
         margin-top: 1.333333vw;
     }
-    .question .part3 .part3-tip, .question .part4 .part4-tip {
+    .question .part4 .part4-tip{
         margin-top: 2.666667vw;
         font-size: min(3vw, 14px);
         padding: 0 9.333333vw;
         width: auto;
     }
-    .question .part3 .bg, .question .part5 .bg {
+    .question .part3 .bg{
         height: auto;
     }
-  
     .cold{
         margin-top: -13.333333vw;
         padding-bottom: 10.666667vw;

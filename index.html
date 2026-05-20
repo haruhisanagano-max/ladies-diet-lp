@@ -816,195 +816,151 @@ height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
 							<li><a class="js-modal-open" data-modal="line"><img src="./images/top/btn_line02.png" alt=""></a></li>
 						</ul>
 					</div>
-					<?php
-                        switch ($page) {
-                            case FMAIL_FORM:
-                    ?>
-                    	<p class="text2 ff-medi">以下のフォームに必要事項をご記入の上、<br>確認ボタンをクリックして下さい。<br>内容を確認した後、<br class="visible-ts">担当者よりお返事いたします。</p>
-						<p class="text3">※が付いている項目は必須項目になります。</p>
-						<form name="form" action="#jump7" method="post" id="myform">
-					    	<input type="hidden" name="action" value="action" />
-							<dl class="line line1">
-								<dt class="line-text red">希望クリニック<sup>※</sup></dt>
-								<dd>
-									<div class="line-right">
-										<select name="parm[method]" id="" >
-											<option value="" disabled selected>クリニックを選択</option>
-											<?php
-												$content01='';
-												$select01=array('京都院','広島院','福岡天神院');
-												foreach ($select01 as $key=>$value){
-													$content01.='<option value="'.$value.'" ';
-													if($value==@$parm['method']){
-														$content01.=' selected="">'.$value.'</option>';
-													}else {
-														$content01.= '>'.$value.'</option>';
-													}
-												}
-												echo $content01;
-											?>
+					
+					<p class="text2 ff-medi">以下のフォームに必要事項をご記入の上、<br>確認ボタンをクリックして下さい。<br>内容を確認した後、<br class="visible-ts">担当者よりお返事いたします。</p>
+					<p class="text3">※が付いている項目は必須項目になります。</p>
+					
+					<form name="form" action="" method="post" id="myform">
+						<dl class="line line1">
+							<dt class="line-text red">希望クリニック<sup>※</sup></dt>
+							<dd>
+								<div class="line-right">
+									<select name="parm[method]" id="">
+										<option value="" disabled selected>クリニックを選択</option>
+										<option value="京都院">京都院</option>
+										<option value="広島院">広島院</option>
+										<option value="福岡天神院">福岡天神院</option>
+									</select>
+								</div>
+							</dd>
+						</dl>
+						
+						<dl class="line line2">
+							<dt class="line-text red">予約希望日時（第1希望）<sup>※</sup></dt>
+							<dd>
+								<div class="line-right line-datetime">
+									<p class="item form-date"><input type="date" name="parm[dateform]" value="" placeholder="2024/03/13"></p>
+									<p class="item">
+										<select name="parm[time]" id="">
+											<option value="" disabled selected>時間を選択</option>
+											<option value="10:00">10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
 										</select>
-										
-									</div>
-									<p class="err_mess"><?php echo $error_method; ?></p>
-								</dd>
-							</dl>
-							<dl class="line line2">
-								<dt class="line-text red">予約希望日時（第1希望）<sup>※</sup></dt>
-								<dd>
-									<div class="line-right line-datetime">
-										<p class="item form-date"><input type="date" name="parm[dateform]" value="<?php echo @$parm['dateform']; ?>" placeholder="2024/03/13"></p>
-										
-										<p class="item"><select name="parm[time]" id="" >
-											<option value="" disabled selected></option>
-											<?php
-												$content02='';
-												$select02=array('10:00','11:00','12:00', '13:00','14:00','15:00','16:00','17:00','18:00');
-												foreach ($select02 as $key=>$value){
-													$content02.='<option value="'.$value.'" ';
-													if($value==@$parm['time']){
-														$content02.=' selected="">'.$value.'</option>';
-													}else {
-														$content02.= '>'.$value.'</option>';
-													}
-												}
-												echo $content02;
-											?>
-										</select></p>
-									</div>
-									<p class="err_mess"><?php echo $error_datetime; ?></p>
-								</dd>
-							</dl>
-							<dl class="line line3">
-								<dt class="line-text red">予約希望日時（第2希望）<sup>※</sup></dt>
-								<dd>
-									<div class="line-right line-datetime">
-										<p class="item form-date"><input type="date" name="parm[dateform02]" value="<?php echo @$parm['dateform02']; ?>" placeholder="2024/03/13"></p>
-										<p class="item"><select name="parm[time02]" id="" >
-											<option value="" disabled selected></option>
-											<?php
-												$content03='';
-												$select03=array('10:00','11:00','12:00', '13:00','14:00','15:00','16:00','17:00','18:00');
-												foreach ($select03 as $key=>$value){
-													$content03.='<option value="'.$value.'" ';
-													if($value==@$parm['time02']){
-														$content03.=' selected="">'.$value.'</option>';
-													}else {
-														$content03.= '>'.$value.'</option>';
-													}
-												}
-												echo $content03;
-											?>
-										</select></p>
-									</div>
-									<p class="err_mess"><?php echo $error_datetime02; ?></p>
-								</dd>
-							</dl>
-							<dl class="line line4">
-								<dt class="line-text red">お名前<sup>※</sup></dt>
-								<dd>
-									<div class="line-right">
-										<input type="text" name="parm[name]" value="<?php echo @$parm['name']; ?>" placeholder="京都 花子">
-									</div>
-									<p class="err_mess"><?php echo $error_name; ?></p>
-								</dd>
-								
-							</dl>
-							<dl class="line line5">
-								<dt class="line-text red">年齢<sup>※</sup></dt>
-								<dd>
-									<div class="line-right">
-										<input type="text" name="parm[age]" value="<?php echo @$parm['age']; ?>" placeholder="例）20">
-										<p class="age">歳</p>
-									</div>
-									<p class="err_mess"><?php echo $error_age; ?></p>
-								</dd>
-								
-							</dl>
-							<dl class="line line6">
-								<dt class="line-text red">電話番号<sup>※</sup></dt>
-								<dd>
-									<div class="line-right">
-										<input type="tel" name="parm[tel]" value="<?php echo @$parm['tel']; ?>" placeholder="08012345678">
-									</div>
-									<p class="err_mess"><?php echo $error_tel; ?></p>
-								</dd>
-							</dl>
-							<dl class="line line7">
-								<dt class="line-text red">メールアドレス<sup>※</sup></dt>
-								<dd>
-									<div class="line-right">
-										<input type="email" name="parm[email]" value="<?php echo @$parm['email']; ?>" placeholder="virgin@example.com">
-										
-									</div>
-									<p class="err_mess"><?php echo $error_email; ?></p>
-								</dd>
-								
-							</dl>
-							<dl class="line line8">
-								<dt class="line-text">ご希望の施術</dt>
-								<dd>
-									<div class="line-right">
-										<input type="text" name="parm[treatment]" value="<?php echo @$parm['treatment']; ?>" placeholder="">
-									</div>
-								</dd>
-							</dl>
-							<dl class="line line9">
-								<dt class="line-text">お問合せ内容</dt>
-								<dd>
-									<div class="line-right">
-										<textarea name="parm[content]" id="" cols="30" rows="10" placeholder="ご希望のメニューや、ご質問・ご要望がございましたらご記入ください。"><?php echo @$parm['content']; ?></textarea>
-									</div>
-								</dd>
-							</dl>
-							<div class="privacy">
-								<div class="check">
-									<?php
-	                                    $content04="";
-	                                    $split="";
-	                                    $checked= @$parm['acceptance'];
-	                                    $name = array('agree');
-	                                    $checkbox=array('<a href="https://v-clinic.jp/privacy-policy/" class="link" target="_blank">プライバシーポリシーに同意する</a>');
-	                                    $i=0;
-
-	                                        foreach ((array) $checkbox as $key=>$value){
-	                                            if(is_array($name)){
-	                                                $content04.="<label><input name='parm[acceptance][{$name[$key]}]' id='checkbox01' type='checkbox' class='checkbox01-input' value='".$name[$key]."'";
-	                                            }else {
-	                                                $content04.="<label><input name='parm[acceptance][{$name[$key]}]' id='checkbox01' type='checkbox' class='checkbox01-input' value='".$name[$key]."'";
-	                                            }
-	                                            $i++;
-	                                            $flag=false;
-	                                            foreach ((array) $checked as $k=>$v){
-	                                                if($name[$key]==$v){
-	                                                    $flag=true;
-	                                                }
-	                                            }
-	                                            if($flag){
-	                                                $content04.=" checked><span class='checkbox01-parts'>$value</span></label>";
-	                                            }else {
-	                                                $content04.="><span class='checkbox01-parts'>$value</span></label>";
-	                                            }
-	                                            $content04=$content04.$split;
-	                                        }
-	                                    echo $content04;
-	                                ?>
-	                                <p class="err_mess"><?php echo $error_acceptance; ?></p>
+									</p>
 								</div>
-								
-							</div>
-							<div class="btn">
-								<!-- <img src="./images/top/data-btn.png" alt=""> -->
-								<input type="submit" id="send" value="確認画面へ">
-							</div>
-							<div class="bottom">
-								<div class="white">
-									<p class="text4 ff-bold">未成年の方へ</p>
-									<p class="text5">未成年の方が施術を受ける際には親権者（保護者）の同意が必要となります。下記ボタンより同意書をダウンロード、印刷していただき、必要事項を記入し捺印の上お持ちください。</p>
-									<a href="https://v-clinic.jp/file/未成年者同意書.pdf" class="link2" target="_blank">
-										<img src="./images/top/data-btn2.png" alt="">
-									</a>
+							</dd>
+						</dl>
+						
+						<dl class="line line3">
+							<dt class="line-text red">予約希望日時（第2希望）<sup>※</sup></dt>
+							<dd>
+								<div class="line-right line-datetime">
+									<p class="item form-date"><input type="date" name="parm[dateform02]" value="" placeholder="2024/03/13"></p>
+									<p class="item">
+										<select name="parm[time02]" id="">
+											<option value="" disabled selected>時間を選択</option>
+											<option value="10:00">10:00</option>
+											<option value="11:00">11:00</option>
+											<option value="12:00">12:00</option>
+											<option value="13:00">13:00</option>
+											<option value="14:00">14:00</option>
+											<option value="15:00">15:00</option>
+											<option value="16:00">16:00</option>
+											<option value="17:00">17:00</option>
+											<option value="18:00">18:00</option>
+										</select>
+									</p>
 								</div>
+							</dd>
+						</dl>
+						
+						<dl class="line line4">
+							<dt class="line-text red">お名前<sup>※</sup></dt>
+							<dd>
+								<div class="line-right">
+									<input type="text" name="parm[name]" value="" placeholder="京都 花子">
+								</div>
+							</dd>
+						</dl>
+						
+						<dl class="line line5">
+							<dt class="line-text red">年齢<sup>※</sup></dt>
+							<dd>
+								<div class="line-right">
+									<input type="text" name="parm[age]" value="" placeholder="例）20">
+									<p class="age">歳</p>
+								</div>
+							</dd>
+						</dl>
+						
+						<dl class="line line6">
+							<dt class="line-text red">電話番号<sup>※</sup></dt>
+							<dd>
+								<div class="line-right">
+									<input type="tel" name="parm[tel]" value="" placeholder="08012345678">
+								</div>
+							</dd>
+						</dl>
+						
+						<dl class="line line7">
+							<dt class="line-text red">メールアドレス<sup>※</sup></dt>
+							<dd>
+								<div class="line-right">
+									<input type="email" name="parm[email]" value="" placeholder="virgin@example.com">
+								</div>
+							</dd>
+						</dl>
+						
+						<dl class="line line8">
+							<dt class="line-text">ご希望の施術</dt>
+							<dd>
+								<div class="line-right">
+									<input type="text" name="parm[treatment]" value="" placeholder="">
+								</div>
+							</dd>
+						</dl>
+						
+						<dl class="line line9">
+							<dt class="line-text">お問合せ内容</dt>
+							<dd>
+								<div class="line-right">
+									<textarea name="parm[content]" id="" cols="30" rows="10" placeholder="ご希望のメニューや,ご質問・ご要望がございましたらご記入ください。"></textarea>
+								</div>
+							</dd>
+						</dl>
+						
+						<div class="privacy">
+							<div class="check">
+								<label>
+									<input name="parm[acceptance][agree]" id="checkbox01" type="checkbox" class="checkbox01-input" value="agree">
+									<span class="checkbox01-parts"><a href="https://v-clinic.jp/privacy-policy/" class="link" target="_blank">プライバシーポリシーに同意する</a></span>
+								</label>
+							</div>
+						</div>
+						
+						<div class="btn">
+							<input type="submit" id="send" value="確認画面へ">
+						</div>
+						
+						<div class="bottom">
+							<div class="white">
+								<p class="text4 ff-bold">未成年の方へ</p>
+								<p class="text5">未成年の方が施術を受ける際には親権者（保護者）の同意が必要となります。下記ボタンより同意書をダウンロード、印刷していただき、必要事項を記入し捺印の上お持ちください。</p>
+								<a href="https://v-clinic.jp/file/未成年者同意書.pdf" class="link2" target="_blank">
+									<img src="./images/top/data-btn2.png" alt="">
+								</a>
+							</div>
+						</div>
+					</form>
+				</div>
+			</div>
 							</div>
 						</form>
 					<?php
